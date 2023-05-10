@@ -1,0 +1,48 @@
+<p>String / Number list</p>
+
+
+  <mat-form-field class="example-chip-list" appearance="fill">
+    <mat-label>Warehouse Geofences</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Enter fruits"
+    cdkDropList 
+        cdkDropListOrientation="vertical"
+        (cdkDropListDropped)="drop($event)">
+      <mat-chip-row
+        *ngFor="let fruit of fruits"
+        class="mat-chip"
+        (removed)="remove(fruit)"
+        [editable]="true"
+        (edited)="edit(fruit, $event)"
+        [aria-description]="'press enter to edit ' + fruit.name"
+        class="example-box"
+        cdkDrag
+        >
+        {{fruit.name}}
+        <button matChipRemove [attr.aria-label]="'remove ' + fruit.name">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+      <input
+      id="text-field"
+        matInput [matDatepicker]="datepicker"
+        placeholder="Enter List items..."
+        [matChipInputFor]="chipGrid"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="add($event)"
+        
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancel</button>
+          <button id="simulate" mat-raised-button color="primary" matDatepickerApply (click)="createEnter()">Apply</button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-chip-grid>
+  </mat-form-field>
+
+  <input id="textfield"/>
+  <div *ngFor= "let fruit of fruits">
+      <p>{{fruit.name}}</p>
+  </div>
